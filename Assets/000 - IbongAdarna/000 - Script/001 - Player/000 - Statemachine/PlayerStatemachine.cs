@@ -8,6 +8,9 @@ public class PlayerStatemachine
     public PlayerMovementData MovementData { get; private set; }
     public PlayerActiveData ActiveData { get; private set; }
     public PlayerStateController Controller { get; private set; }
+    public GameplayController GameControl { get; private set; }
+    public PlayerEnvironment Environment { get; private set; }
+    public PlayerDirection Direction { get; private set; }
 
     //  ======================================
 
@@ -18,20 +21,24 @@ public class PlayerStatemachine
     //  ======================================
     
     public PlayerStatemachine(PlayerStateChanger changer, PlayerMovementData movementData, PlayerActiveData activeData,
-        PlayerStateController controller, string animationName)
+        PlayerStateController controller, GameplayController gameController, PlayerEnvironment environment,
+        PlayerDirection direction, string animationName)
     {
         Changer = changer;
         MovementData = movementData;
         ActiveData = activeData;
         AnimationName = animationName;
         Controller = controller;
+        GameControl = gameController;
+        Environment = environment;
+        Direction = direction;
     }
 
     public virtual void Enter()
     {
         DoChecks();
 
-        Controller.playerAnimator.SetBool(AnimationName, true);
+        Controller.PlayerAnimator.SetBool(AnimationName, true);
 
         AnimationFinished = false;
         AnimationExiting = false;
@@ -39,7 +46,7 @@ public class PlayerStatemachine
 
     public virtual void Exit()
     {
-        Controller.playerAnimator.SetBool(AnimationName, false);
+        Controller.PlayerAnimator.SetBool(AnimationName, false);
 
         AnimationExiting = true;
     }

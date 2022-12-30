@@ -5,8 +5,9 @@ using UnityEngine;
 public class GroundState : PlayerStatemachine
 {
     public GroundState(PlayerStateChanger changer, PlayerMovementData movementData,
-        PlayerActiveData activeData, PlayerStateController controller, string animationName) : 
-        base(changer, movementData, activeData, controller, animationName)
+        PlayerActiveData activeData, PlayerStateController controller, GameplayController gameController, PlayerEnvironment environment,
+        PlayerDirection direction, string animationName) :
+        base(changer, movementData, activeData, controller, gameController, environment, direction, animationName)
     {
     }
 

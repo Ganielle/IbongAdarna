@@ -28,24 +28,97 @@ public partial class @GameController : IInputActionCollection2, IDisposable
             ""id"": ""b7701d4a-1fde-4950-8884-d3bf9cdbf84b"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""name"": ""LeftMovement"",
+                    ""type"": ""Button"",
                     ""id"": ""e37bb371-fb9e-45a4-82ad-a87c44d4b7c1"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightMovement"",
+                    ""type"": ""Button"",
+                    ""id"": ""211b08f5-fbd7-4fd0-bd1c-e885c78102d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec8acdba-c64e-4c3c-8ff3-cc85fc2654b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""fb938a8e-3c3c-40f4-83b8-6e59d29accb4"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gameplay"",
-                    ""action"": ""Movement"",
+                    ""action"": ""LeftMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da65665f-6a58-458b-b595-b731d8ef9b07"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""LeftMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b754faf-6d8d-44b2-8480-1579170dfe44"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gameplay"",
+                    ""action"": ""RightMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""add3c13f-91f0-4f3e-af18-4242381f9120"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""RightMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e7b587e-4ba8-4d35-9357-11fae274c0d1"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gameplay"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5dee31e3-d37f-46ab-815f-093508683386"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -56,13 +129,32 @@ public partial class @GameController : IInputActionCollection2, IDisposable
         {
             ""name"": ""Gameplay"",
             ""bindingGroup"": ""Gameplay"",
-            ""devices"": []
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PC"",
+            ""bindingGroup"": ""PC"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
-        m_Game_Movement = m_Game.FindAction("Movement", throwIfNotFound: true);
+        m_Game_LeftMovement = m_Game.FindAction("LeftMovement", throwIfNotFound: true);
+        m_Game_RightMovement = m_Game.FindAction("RightMovement", throwIfNotFound: true);
+        m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -122,12 +214,16 @@ public partial class @GameController : IInputActionCollection2, IDisposable
     // Game
     private readonly InputActionMap m_Game;
     private IGameActions m_GameActionsCallbackInterface;
-    private readonly InputAction m_Game_Movement;
+    private readonly InputAction m_Game_LeftMovement;
+    private readonly InputAction m_Game_RightMovement;
+    private readonly InputAction m_Game_Jump;
     public struct GameActions
     {
         private @GameController m_Wrapper;
         public GameActions(@GameController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Game_Movement;
+        public InputAction @LeftMovement => m_Wrapper.m_Game_LeftMovement;
+        public InputAction @RightMovement => m_Wrapper.m_Game_RightMovement;
+        public InputAction @Jump => m_Wrapper.m_Game_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -137,16 +233,28 @@ public partial class @GameController : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GameActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMovement;
+                @LeftMovement.started -= m_Wrapper.m_GameActionsCallbackInterface.OnLeftMovement;
+                @LeftMovement.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnLeftMovement;
+                @LeftMovement.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnLeftMovement;
+                @RightMovement.started -= m_Wrapper.m_GameActionsCallbackInterface.OnRightMovement;
+                @RightMovement.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnRightMovement;
+                @RightMovement.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnRightMovement;
+                @Jump.started -= m_Wrapper.m_GameActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_GameActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
+                @LeftMovement.started += instance.OnLeftMovement;
+                @LeftMovement.performed += instance.OnLeftMovement;
+                @LeftMovement.canceled += instance.OnLeftMovement;
+                @RightMovement.started += instance.OnRightMovement;
+                @RightMovement.performed += instance.OnRightMovement;
+                @RightMovement.canceled += instance.OnRightMovement;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -160,8 +268,19 @@ public partial class @GameController : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_GameplaySchemeIndex];
         }
     }
+    private int m_PCSchemeIndex = -1;
+    public InputControlScheme PCScheme
+    {
+        get
+        {
+            if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
+            return asset.controlSchemes[m_PCSchemeIndex];
+        }
+    }
     public interface IGameActions
     {
-        void OnMovement(InputAction.CallbackContext context);
+        void OnLeftMovement(InputAction.CallbackContext context);
+        void OnRightMovement(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
