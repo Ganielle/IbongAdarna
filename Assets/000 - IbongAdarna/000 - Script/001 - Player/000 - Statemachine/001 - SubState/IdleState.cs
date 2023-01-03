@@ -27,8 +27,12 @@ public class IdleState : GroundState
 
     private void AnimationChanger()
     {
-        if (!AnimationExiting)
+        if (!AnimationExiting && Environment.Grounded)
         {
+            if (GameControl.Jump)
+            {
+                Changer.ChangeState(Controller.Jump);
+            }
             if (GameControl.LeftTurn || GameControl.RightTurn)
             {
                 Direction.FlipPlayer(GameControl.MovementDirection);

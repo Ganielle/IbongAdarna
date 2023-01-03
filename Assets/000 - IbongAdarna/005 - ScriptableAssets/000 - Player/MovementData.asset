@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ee841111a633445a85b0d19c52451f, type: 3}
   m_Name: MovementData
   m_EditorClassIdentifier: 
-  <MovementSpeed>k__BackingField: 20
+  <GroundMovementSpeed>k__BackingField: 30
+  <AirMovementSpeed>k__BackingField: 35
+  <JumpStrength>k__BackingField: 70
+  <JumpHeightMultiplier>k__BackingField: 0.5
+  <GroundRadius>k__BackingField: 0.19
+  <GroundLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
+  <WallFrontCheckPos>k__BackingField: {x: 1.27, y: 3.41}
+  <WallFrontRadius>k__BackingField: {x: 0.22, y: 5.33}
+  <WallLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 128

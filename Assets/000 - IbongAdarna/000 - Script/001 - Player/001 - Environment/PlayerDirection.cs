@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public class PlayerDirection : MonoBehaviour
 {
-    public int CurrentDirection { get; private set; }
+    public int CurrentDirection { get; private set; } = 1;
 
     //  ===================================
 

@@ -13,16 +13,13 @@ public class PlayerStateController : MonoBehaviour
     [field: SerializeField] public GameplayController Controller { get; private set; }
     [field: SerializeField] public Animator PlayerAnimator { get; private set; }
 
-
-    [field: Header("DEBUGGER")]
-    [field: ReadOnly] [field: SerializeField] public bool Grounded;
-    //[field: ReadOnly] [field: SerializeField] public bool 
-
     //  ==============================================
 
     public PlayerStateChanger Changer { get; set; }
     public IdleState Idle { get; set; }
     public MoveState Move { get; set; }
+    public AirState InAir { get; set; }
+    public JumpState Jump { get; set; }
 
     //  ==============================================
 
@@ -31,8 +28,11 @@ public class PlayerStateController : MonoBehaviour
         Changer = new PlayerStateChanger();
         Idle = new IdleState(Changer, MovementData, ActiveData, this, Controller, Environment, Direction, "idle");
         Move = new MoveState(Changer, MovementData, ActiveData, this, Controller, Environment, Direction, "run");
+        InAir = new AirState(Changer, MovementData, ActiveData, this, Controller, Environment, Direction, "inAir");
+        Jump = new JumpState(Changer, MovementData, ActiveData, this, Controller, Environment, Direction, "inAir");
 
         Changer.Initialize(Idle);
+        Direction.FlipPlayer(1);
         yield return null;
     }
 
@@ -44,6 +44,7 @@ public class PlayerStateController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Environment.CurrentVelocitySet();
         if (Changer != null)
             Changer.CurrentState.PhysicsUpdate();
     }

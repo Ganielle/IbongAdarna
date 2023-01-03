@@ -17,6 +17,7 @@ public class PlayerStatemachine
     public bool AnimationFinished { get; private set; }
     public bool AnimationExiting { get; private set; }
     public string AnimationName { get; private set; }
+    public float TimeEnter { get; private set; }
 
     //  ======================================
     
@@ -36,16 +37,18 @@ public class PlayerStatemachine
 
     public virtual void Enter()
     {
+        TimeEnter = Time.time;
+
         DoChecks();
 
         Controller.PlayerAnimator.SetBool(AnimationName, true);
-
         AnimationFinished = false;
         AnimationExiting = false;
     }
 
     public virtual void Exit()
     {
+        TimeEnter = 0f;
         Controller.PlayerAnimator.SetBool(AnimationName, false);
 
         AnimationExiting = true;

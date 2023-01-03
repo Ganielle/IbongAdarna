@@ -25,13 +25,17 @@ public class MoveState : GroundState
 
     private void MovePlayer()
     {
-        Environment.SetVelocityX(MovementData.MovementSpeed * Direction.CurrentDirection);
+        Environment.SetVelocityX(MovementData.GroundMovementSpeed * Direction.CurrentDirection);
     }
 
     private void ChangeAnimation()
     {
         if (!AnimationExiting)
         {
+            if (GameControl.Jump)
+            {
+                Changer.ChangeState(Controller.Jump);
+            }
             if (!GameControl.LeftTurn && !GameControl.RightTurn)
             {
                 Changer.ChangeState(Controller.Idle);

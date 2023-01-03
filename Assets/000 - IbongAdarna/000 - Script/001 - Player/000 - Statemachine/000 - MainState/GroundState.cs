@@ -11,10 +11,24 @@ public class GroundState : PlayerStatemachine
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        Environment.RemoveInAirMat();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
         // AIR STATE HERE
+        if (!AnimationExiting)
+        {
+            if (!Environment.Grounded && !GameControl.Jump && !Controller.Jump.Jumping)
+            {
+                Changer.ChangeState(Controller.InAir);
+            }
+        }
     }
 }
