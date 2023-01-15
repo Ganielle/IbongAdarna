@@ -61,6 +61,7 @@ public class MainMenuController : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.MainCamera.orthographic = true;
         OnStateChanged += MainMenuStateChange;
     }
 

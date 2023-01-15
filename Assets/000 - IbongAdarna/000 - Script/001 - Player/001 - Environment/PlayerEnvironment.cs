@@ -27,6 +27,7 @@ public class PlayerEnvironment : MonoBehaviour
 
     //  ================================
 
+    [SerializeField] private GameplayManager gameplayManager;
     [SerializeField] private PlayerMovementData movementData;
     [SerializeField] private PlayerDirection direction;
     [SerializeField] private Rigidbody2D playerRB;
@@ -65,6 +66,19 @@ public class PlayerEnvironment : MonoBehaviour
         {
             triggerCollapseFloor = false;
             stopCollapse?.Invoke();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("respawnpoints"))
+        {
+            gameplayManager.RespawnPosition = transform.position;
+        }
+
+        if (collision.CompareTag("death"))
+        {
+            transform.position = gameplayManager.RespawnPosition;
         }
     }
 

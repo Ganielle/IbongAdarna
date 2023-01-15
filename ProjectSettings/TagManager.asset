@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - CollapsableFloor
+  - PuzzleBox
+  - death
+  - respawnpoints
   layers:
   - Default
   - TransparentFX
@@ -14,10 +17,10 @@ TagManager:
   - UI
   - ground
   - wall
-  - 
-  - 
-  - 
-  - 
+  - box
+  - pressureplate
+  - boxwall
+  - respawnpoints
   - 
   - 
   - 

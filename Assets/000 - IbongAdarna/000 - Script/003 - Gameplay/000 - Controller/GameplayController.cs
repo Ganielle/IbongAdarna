@@ -26,6 +26,7 @@ public class GameplayController : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.MainCamera.orthographic = false;
         gameController = new GameController();
     }
 

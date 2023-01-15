@@ -47,7 +47,6 @@ public class JumpState : GroundState
 
     private void MoveInAir()
     {
-        Debug.Log(Environment.TouchWall);
         if (Environment.TouchWall) return;
 
         if (!GameControl.LeftTurn && !GameControl.RightTurn) return;

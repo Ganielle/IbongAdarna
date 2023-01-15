@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> dontDestroyOnLoad;
     [field: SerializeField] public AnimationsLT Animations { get; set; }
     [field: SerializeField] public SceneController sceneController { get; set; }
+    [field: SerializeField] public Camera MainCamera { get; set; }
+    [field: SerializeField] public Camera UICamera { get; set; }
 
     [Space]
     [SerializeField] private string sceneName;

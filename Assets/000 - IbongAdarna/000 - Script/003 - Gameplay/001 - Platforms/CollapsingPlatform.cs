@@ -24,7 +24,14 @@ public class CollapsingPlatform : MonoBehaviour
 
     private void Awake()
     {
-        defaultPosition = transform.localPosition;
+        floorRB.velocity = Vector2.zero;
+        floorRB.gravityScale = 0f;
+        floorMR.enabled = true;
+        floorCollider.enabled = true;
+        cannotStop = false;
+        floorRB.isKinematic = true;
+
+        defaultPosition = transform.position;
     }
 
     public void StartToCollapse()
@@ -54,7 +61,7 @@ public class CollapsingPlatform : MonoBehaviour
             yield return null;
         }
         cannotStop = true;
-        LeanTween.moveX(gameObject, -13.1f, 0.05f).setLoopPingPong();
+        collapseAnimation = LeanTween.moveX(gameObject, transform.position.x + 1.5f, 0.05f).setLoopPingPong().id;
         StartCoroutine(CheckToDestroy());
     }
 
@@ -71,7 +78,7 @@ public class CollapsingPlatform : MonoBehaviour
         if (collapseAnimation != 0) LeanTween.cancel(collapseAnimation);
 
         floorRB.isKinematic = false;
-        transform.localPosition = defaultPosition;
+        transform.position = defaultPosition;
         floorRB.gravityScale = 1f;
 
         while (floorRB.velocity.y >= -80f)
@@ -97,7 +104,7 @@ public class CollapsingPlatform : MonoBehaviour
 
         floorRB.velocity = Vector2.zero;
         floorRB.gravityScale = 0f;
-        transform.localPosition = defaultPosition;
+        transform.position = defaultPosition;
         floorMR.enabled = true;
         floorCollider.enabled = true;
         cannotStop = false;

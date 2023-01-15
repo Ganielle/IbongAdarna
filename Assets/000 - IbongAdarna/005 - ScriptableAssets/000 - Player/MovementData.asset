@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GroundMovementSpeed>k__BackingField: 30
   <AirMovementSpeed>k__BackingField: 35
-  <JumpStrength>k__BackingField: 70
+  <JumpStrength>k__BackingField: 80
   <JumpHeightMultiplier>k__BackingField: 0.5
   <GroundRadius>k__BackingField: 0.19
   <GroundLayer>k__BackingField:
