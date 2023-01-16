@@ -33,6 +33,7 @@ public class PlayerEnvironment : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRB;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private PhysicsMaterial2D inAirMat;
+    [SerializeField] private PlayerGameplay gameplay;
 
     //  ================================
 
@@ -79,6 +80,7 @@ public class PlayerEnvironment : MonoBehaviour
         if (collision.CompareTag("death"))
         {
             transform.position = gameplayManager.RespawnPosition;
+            gameplay.HealthChanger(true);
         }
     }
 
