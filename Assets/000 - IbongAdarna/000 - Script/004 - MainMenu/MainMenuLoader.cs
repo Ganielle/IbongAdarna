@@ -9,7 +9,10 @@ public class MainMenuLoader : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.sceneController.AddActionLoadinList(StageSelectInitialize());
+        GameManager.Instance.sceneController.AddActionLoadinList(GameManager.Instance.SoundMnger.CheckVolumeSaveData());
+        GameManager.Instance.sceneController.AddActionLoadinList(mainMenuController.ChangeBGMusic());
         GameManager.Instance.sceneController.ActionPass = true;
+        GameManager.Instance.sceneController.ResumeTime = true;
     }
 
     IEnumerator StageSelectInitialize()

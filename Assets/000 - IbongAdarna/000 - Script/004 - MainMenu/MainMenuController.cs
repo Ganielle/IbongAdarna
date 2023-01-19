@@ -41,6 +41,8 @@ public class MainMenuController : MonoBehaviour
 
     [Header("MAIN MENU")]
     [SerializeField] private CanvasGroup menuCG;
+    [SerializeField] private AudioClip bgMusic;
+    [SerializeField] private OptionsManager optionsManager;
 
     [Header("SELECTSTAGE")]
     [SerializeField] private CanvasGroup selectStageCG;
@@ -73,6 +75,13 @@ public class MainMenuController : MonoBehaviour
     private void MainMenuStateChange(object sender, EventArgs e)
     {
         AnimationPanels();
+    }
+
+    public IEnumerator ChangeBGMusic()
+    {
+        optionsManager.CheckVolume();
+        GameManager.Instance.SoundMnger.SetBGMusic(bgMusic);
+        yield return null;
     }
 
     private void AnimationPanels()

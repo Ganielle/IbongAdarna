@@ -36,6 +36,11 @@ public class PlayerEnvironment : MonoBehaviour
     [SerializeField] private PlayerGameplay gameplay;
     [SerializeField] private ObjectiveManager objectiveManager;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip jumpClip;
+    [SerializeField] private AudioClip damageClip;
+    [SerializeField] private AudioClip pickupClip;
+
     //  ================================
 
     [Header("DEBUGGER")]
@@ -80,12 +85,14 @@ public class PlayerEnvironment : MonoBehaviour
 
         if (collision.CompareTag("death"))
         {
+            GameManager.Instance.SoundMnger.PlaySFX(damageClip);
             transform.position = gameplayManager.RespawnPosition;
             gameplay.HealthChanger(true);
         }
 
         if (collision.CompareTag("artifacts"))
         {
+            GameManager.Instance.SoundMnger.PlaySFX(pickupClip);
             objectiveManager.ArtifactCount++;
             collision.GetComponent<ArtifactController>().DialogueEnabler();
             collision.gameObject.SetActive(false);
@@ -147,6 +154,8 @@ public class PlayerEnvironment : MonoBehaviour
             else return false;
         }
     }
+
+    public void PlayJumpSFX() => GameManager.Instance.SoundMnger.PlaySFX(jumpClip);
 
     private void OnDrawGizmos()
     {

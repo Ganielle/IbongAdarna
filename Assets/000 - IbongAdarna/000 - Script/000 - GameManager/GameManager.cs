@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> dontDestroyOnLoad;
     [field: SerializeField] public AnimationsLT Animations { get; set; }
     [field: SerializeField] public SceneController sceneController { get; set; }
+    [field: SerializeField] public SoundManager SoundMnger { get; set; }
     [field: SerializeField] public Camera MainCamera { get; set; }
     [field: SerializeField] public Camera UICamera { get; set; }
 
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator TypingEffect(TextMeshProUGUI text, string value, float speed, bool isLoop, Action action = null)
     {
         text.text = "";
+        int index = 0;
 
         if (isLoop)
         {
@@ -62,7 +64,14 @@ public class GameManager : MonoBehaviour
             {
                 foreach (char c in value)
                 {
+                    if (index >= value.Length)
+                    {
+                        text.text = "";
+                        index = 0;
+                    }
+
                     text.text += c;
+                    index++;
                     yield return new WaitForSecondsRealtime(speed);
                 }
 

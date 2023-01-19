@@ -27,6 +27,8 @@ public class PlayerGameplay : MonoBehaviour
     }
 
     [SerializeField] private GameplayManager gameplayManager;
+    [SerializeField] private AudioClip deathClip;
+    [SerializeField] private List<GameObject> playerObjs;
 
     [Header("DEBUGGER")]
     [ReadOnly] [SerializeField] private int currentHealth;
@@ -47,8 +49,9 @@ public class PlayerGameplay : MonoBehaviour
     {
         if (Health <= 0)
         {
+            GameManager.Instance.SoundMnger.PlaySFX(deathClip);
             gameplayManager.GameOver();
-            gameObject.SetActive(false);
+            foreach (GameObject go in playerObjs) go.SetActive(false);
         }
     }
 

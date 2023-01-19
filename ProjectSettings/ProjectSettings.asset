@@ -138,6 +138,7 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -250,7 +251,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/ganielleDOTexe/Desktop/CBSGameDev/CreativeBrainKeystore/CreativeBrainStudioKeystore.keystore
+  AndroidKeystoreName: '{inproject}: Assets/CreativeBrainStudioKeystore.keystore'
   AndroidKeyaliasName: cbs
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

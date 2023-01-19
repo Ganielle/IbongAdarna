@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameplayManager : MonoBehaviour
 {
     [SerializeField] private PlayerGameplay playerGameplay;
+    [SerializeField] private AudioClip bgClip;
 
     [Header("DIALOGUE")]
     [SerializeField] private GameObject dialogueObj;
@@ -96,6 +97,12 @@ public class GameplayManager : MonoBehaviour
             stageCompleteButtonsCG.gameObject.SetActive(true);
             LeanTween.alphaCanvas(stageCompleteButtonsCG, 1f, 0.25f).setEase(LeanTweenType.easeInOutSine).setDelay(0.5f);
         });
+    }
+
+    public IEnumerator ChangeBG()
+    {
+        GameManager.Instance.SoundMnger.SetBGMusic(bgClip);
+        yield return null;
     }
 
     #region BUTTONS

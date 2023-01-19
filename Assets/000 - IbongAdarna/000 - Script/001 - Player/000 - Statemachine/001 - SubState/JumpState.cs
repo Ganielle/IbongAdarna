@@ -17,6 +17,8 @@ public class JumpState : GroundState
     {
         base.Enter();
 
+        Environment.PlayJumpSFX();
+
         Jumping = true;
 
         if (Environment.Grounded)

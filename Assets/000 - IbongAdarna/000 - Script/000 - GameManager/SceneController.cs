@@ -55,6 +55,8 @@ public class SceneController : MonoBehaviour
         actionLoading.Add(action);
     }
 
+    public bool ResumeTime { get => canResumeTime; set => canResumeTime = value; }
+
     //  ===========================================
 
     [SerializeField] private List<GameObject> loadingObjs;
@@ -71,6 +73,7 @@ public class SceneController : MonoBehaviour
     [ReadOnly][SerializeField] private string currentScene;
     [ReadOnly][SerializeField] private string previousScene;
     [ReadOnly][SerializeField] private bool actionPass;
+    [ReadOnly] [SerializeField] private bool canResumeTime;
     [ReadOnly][SerializeField] private float totalSceneProgress;
     [ReadOnly][SerializeField] private bool splashOver;
 
@@ -193,7 +196,8 @@ public class SceneController : MonoBehaviour
 
         totalSceneProgress = 0f;
 
-        Time.timeScale = 1f;
+        if (ResumeTime)
+            Time.timeScale = 1f;
 
         GameManager.Instance.CanUseButtons = true;
     }
