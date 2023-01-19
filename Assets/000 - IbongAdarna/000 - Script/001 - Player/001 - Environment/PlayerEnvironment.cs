@@ -34,6 +34,7 @@ public class PlayerEnvironment : MonoBehaviour
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private PhysicsMaterial2D inAirMat;
     [SerializeField] private PlayerGameplay gameplay;
+    [SerializeField] private ObjectiveManager objectiveManager;
 
     //  ================================
 
@@ -81,6 +82,18 @@ public class PlayerEnvironment : MonoBehaviour
         {
             transform.position = gameplayManager.RespawnPosition;
             gameplay.HealthChanger(true);
+        }
+
+        if (collision.CompareTag("artifacts"))
+        {
+            objectiveManager.ArtifactCount++;
+            collision.GetComponent<ArtifactController>().DialogueEnabler();
+            collision.gameObject.SetActive(false);
+        }
+
+        if (collision.CompareTag("end"))
+        {
+            gameplayManager.NextStageIndicator();
         }
     }
 

@@ -8,6 +8,8 @@ TagManager:
   - PuzzleBox
   - death
   - respawnpoints
+  - artifacts
+  - end
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - pressureplate
   - boxwall
   - respawnpoints
-  - 
+  - artifacts
   - 
   - 
   - 

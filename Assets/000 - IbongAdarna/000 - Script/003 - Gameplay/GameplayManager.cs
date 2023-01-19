@@ -2,11 +2,19 @@ using MyBox;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
     [SerializeField] private PlayerGameplay playerGameplay;
+
+    [Header("DIALOGUE")]
+    [SerializeField] private GameObject dialogueObj;
+
+    [Header("STAGE COMPLETE")]
+    [SerializeField] private CanvasGroup stageCompleteCG;
+    [SerializeField] private CanvasGroup stageCompleteButtonsCG;
 
     [Header("HEALTH")]
     [SerializeField] private List<GameObject> healthIndicatorList;
@@ -75,12 +83,29 @@ public class GameplayManager : MonoBehaviour
         });
     }
 
+    public void NextStageIndicator()
+    {
+        Time.timeScale = 0;
+
+        stageCompleteCG.alpha = 0;
+        stageCompleteCG.gameObject.SetActive(true);
+
+        LeanTween.alphaCanvas(stageCompleteCG, 1f, 0.25f).setEase(LeanTweenType.easeInOutSine).setOnComplete(() =>
+        {
+            stageCompleteButtonsCG.alpha = 0f;
+            stageCompleteButtonsCG.gameObject.SetActive(true);
+            LeanTween.alphaCanvas(stageCompleteButtonsCG, 1f, 0.25f).setEase(LeanTweenType.easeInOutSine).setDelay(0.5f);
+        });
+    }
+
     #region BUTTONS
 
-    public void GameOverButton(string scene)
+    public void ChangeSceneButton(string scene)
     {
         GameManager.Instance.sceneController.CurrentScene = scene;
     }
+
+    public void DialogueEnabler(bool value) => dialogueObj.SetActive(value);
 
     #endregion
 }
