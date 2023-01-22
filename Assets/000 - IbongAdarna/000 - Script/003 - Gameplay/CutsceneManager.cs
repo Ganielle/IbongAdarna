@@ -9,6 +9,7 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private CanvasGroup cg;
     [SerializeField] private Scrollbar dialogueSlider; 
     [SerializeField] private AudioClip narration;
+    [SerializeField] private bool playonstart;
 
     //  =======================
 
@@ -19,6 +20,11 @@ public class CutsceneManager : MonoBehaviour
 
     public IEnumerator PlayCutscene()
     {
+        if (!playonstart)
+        {
+            GameManager.Instance.sceneController.ResumeTime = true;
+            yield break;
+        }
         GameManager.Instance.sceneController.ResumeTime = false;
         dialogueSlider.value = 1f;
 

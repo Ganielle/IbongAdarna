@@ -14,4 +14,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/001 - IbongAdarnaAssets1/Scenes/Stage1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/New Folder/Scenes/Stage3.unity
+    guid: 5aaf1acbafab9574b899f111958595cb
+  - enabled: 1
+    path: Assets/New Folder/Scenes/4th scene.unity
+    guid: e7378c16da9d15c4ea3d9ae87a0e9c3b
+  - enabled: 1
+    path: Assets/New Folder/Scenes/Stage2.unity
+    guid: 3aa32ba6d13b0bb4c9238a84e495a5b5
+  - enabled: 1
+    path: Assets/New Folder/Scenes/7th scene.unity
+    guid: 7b22940ea877efc4888def2ab74ae914
+  - enabled: 1
+    path: Assets/New Folder/Scenes/last stege.unity
+    guid: 63ea3177122e96f41a2d6476861af48a
+  - enabled: 1
+    path: Assets/New Folder/Scenes/last scene.unity
+    guid: 2c5d6799586c747409327ad64738a2fd
   m_configObjects: {}
